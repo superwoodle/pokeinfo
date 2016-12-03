@@ -4,13 +4,6 @@ var APP_ID = undefined; //replace with "amzn1.echo-sdk-ams.app.[your-unique-valu
 var AlexaSkill = require('./AlexaSkill');
 var pokeapi = require('./pokeapi');
 
-
-/**
- * HelloWorld is a child of AlexaSkill.
- * To read more about inheritance in JavaScript, see the link below.
- *
- * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript#Inheritance
- */
 var PokeAPISkill = function () {
     AlexaSkill.call(this, APP_ID);
 };
@@ -27,8 +20,8 @@ PokeAPISkill.prototype.eventHandlers.onSessionStarted = function (sessionStarted
 
 PokeAPISkill.prototype.eventHandlers.onLaunch = function (launchRequest, session, response) {
     console.log("HelloWorld onLaunch requestId: " + launchRequest.requestId + ", sessionId: " + session.sessionId);
-    var speechOutput = "Welcome to the PokeAPI!";
-    var repromptText = "You can say hello";
+    var speechOutput = "Welcome to the PokeAPI! You can ask about Pokemon!";
+    var repromptText = "You can ask about Pokemon!";
     response.ask(speechOutput, repromptText);
 };
 
@@ -48,8 +41,20 @@ PokeAPISkill.prototype.intentHandlers = {
             response.tellWithCard(speechOutput, cardTitle, cardContent);
         });
     },
+    "TypeIntent": function (intent, session, response) {
+        pokeapi.getPokemon(intent.slots.pokemon.value).then(res => {
+            var types = "";
+            for (type of res.data.types) {
+                types += type.type.name + " ";
+            }
+            var speechOutput = `${intent.slots.pokemon.value} is a ${types}pokemon.`;
+            var cardTitle = intent.slots.pokemon.value;
+            var cardContent = speechOutput;
+            response.tellWithCard(speechOutput, cardTitle, cardContent);
+        });
+    },
     "AMAZON.HelpIntent": function (intent, session, response) {
-        response.ask("You can ask how big pizza is", "You can ask how big pizza is!");
+        response.ask("You can ask about Pokemon!", "You can ask about Pokemon!");
     }
 };
 
