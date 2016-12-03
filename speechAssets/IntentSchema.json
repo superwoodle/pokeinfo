@@ -1,0 +1,16 @@
+{
+    "intents": [
+        {
+            "intent": "HowBigIntent",
+            "slots": [
+                {
+                    "name": "pokemon",
+                    "type": "POKEMON"
+                }
+            ]
+        },
+        {
+            "intent": "AMAZON.HelpIntent"
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "pokeapi-alexa-skill",
+  "version": "1.0.0",
+  "description": "An Alexa Skill for http://pokeapi.co/",
+  "main": "index.js",
+  "repository": {
+    "url": "https://chriswoodle@bitbucket.org/chriswoodle/pokeapi-alexa-skill.git",
+    "type": "git"
+  },
+  "author": "Chris Woodle <chris@droplit.io>",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.79.0"
+  }
+}
