@@ -19,6 +19,15 @@
             ]
         },
         {
+            "intent": "NumberIntent",
+            "slots": [
+                {
+                    "name": "pokemon",
+                    "type": "POKEMON"
+                }
+            ]
+        },
+        {
             "intent": "AMAZON.HelpIntent"
         }
     ]
